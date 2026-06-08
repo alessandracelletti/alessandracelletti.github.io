@@ -843,13 +843,17 @@ blockquote,
   }
 }
 
-.profile-card {
-  max-width: 820px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
+/* Correzione desktop: restringe davvero il box centrale */
+@media (min-width: 1101px) {
+  #colonnaCn {
+    margin-left: 430px !important;
+    margin-right: 430px !important;
+  }
 
-#colonnaCn {
-  margin-left: 410px !important;
-  margin-right: 430px !important;
+  #colonnaCn .profile-card {
+    width: 760px !important;
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
