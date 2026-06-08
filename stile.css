@@ -29,9 +29,10 @@ body a {
 }
 
 #quadro {
-  width: 100%;
+  width: 100% !important;
+  max-width: none !important;
   min-height: 100vh;
-  margin: 0;
+  margin: 0 !important;
   background:
     radial-gradient(circle at 48% 44%, rgba(20,123,215,.22), transparent 34%),
     linear-gradient(180deg, #024ba9 0%, #013f93 100%);
@@ -845,11 +846,6 @@ blockquote,
 
 /* Correzione desktop: restringe davvero il box centrale */
 @media (min-width: 1101px) {
-  #colonnaCn {
-    margin-left: 430px !important;
-    margin-right: 430px !important;
-  }
-
   #colonnaCn .profile-card {
     width: 760px !important;
     max-width: 760px !important;
