@@ -1,0 +1,2 @@
+Versione v6: font Georgia, formula r=a(1-e cos u) corretta, layout rimpicciolito per entrare meglio in una schermata standard.
+Caricare tutti i file nella stessa cartella del sito.

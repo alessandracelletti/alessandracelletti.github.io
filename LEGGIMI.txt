@@ -1,0 +1,5 @@
+File modificati: index.html e stile.css.
+Sostituisci questi due file nella cartella del sito.
+
+
+Versione mobile friendly: sotto 900px le colonne vengono disposte una sotto l'altra per cellulari e tablet.
