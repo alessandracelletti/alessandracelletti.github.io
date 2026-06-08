@@ -853,3 +853,36 @@ blockquote,
     margin-right: auto !important;
   }
 }
+
+@media (max-width: 1500px) {
+  #inMezzo,
+  #colonnaSn,
+  #colonnaDx {
+    float: none !important;
+    width: auto !important;
+    margin: 0 !important;
+  }
+
+  #colonnaSn,
+  #colonnaDx,
+  #colonnaCn {
+    padding: 16px 24px !important;
+    margin: 0 !important;
+  }
+
+  .MenuSn,
+  .side-note,
+  .qlinks.card-box {
+    width: 100% !important;
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  #colonnaCn .profile-card {
+    width: 100% !important;
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
