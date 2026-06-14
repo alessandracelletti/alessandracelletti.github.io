@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teaching - Alessandra Celletti</title>
+<style>
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: #0b2f66;
+  line-height: 1.5;
+}
+.header {
+  background: linear-gradient(135deg, #022f73 0%, #024ba9 55%, #0466c8 100%);
+  color: white;
+  padding: 30px 40px 26px 40px;
+}
+.header a {
+  display: inline-block;
+  color: white;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.5);
+  border-radius: 999px;
+  padding: 6px 11px;
+  background: rgba(255,255,255,.12);
+  margin-bottom: 14px;
+}
+.header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.05;
+}
+.header p {
+  margin: 8px 0 0 0;
+  font-size: 1.1rem;
+  opacity: .95;
+}
+.nav {
+  width: min(1120px, calc(100% - 40px));
+  margin: 18px auto 12px auto;
+  padding: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  background: #f4f8ff;
+  border: 1px solid #c8dcf6;
+  border-radius: 16px;
+}
+.nav a {
+  display: inline-block;
+  padding: 7px 12px;
+  color: #024ba9;
+  background: white;
+  border: 1px solid #b9d2f2;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 700;
+}
+.nav a:hover {
+  background: #024ba9;
+  color: white;
+}
+.container {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto 34px auto;
+}
+.card {
+  background: white;
+  border: 1px solid #c8dcf6;
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(2,75,169,.12);
+  padding: 26px 30px;
+  margin-bottom: 22px;
+}
+h2 {
+  color: #024ba9;
+  font-size: 1.65rem;
+  margin: 0 0 14px 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #c8dcf6;
+}
+p {
+  margin: 8px 0;
+  font-size: 1.02rem;
+}
+a {
+  color: #024ba9;
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(2,75,169,.35);
+}
+a:hover {
+  color: #002f72;
+  border-bottom-color: #002f72;
+}
+ul {
+  margin: 0;
+  padding-left: 22px;
+  columns: 2;
+  column-gap: 34px;
+}
+li {
+  break-inside: avoid;
+  margin: 7px 0;
+  padding-left: 3px;
+}
+.highlight {
+  background: #f4f8ff;
+}
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #4a6ea8;
+  font-size: 13px;
+}
+@media (max-width: 800px) {
+  .header { padding: 24px 20px; }
+  .nav, .container { width: calc(100% - 24px); }
+  .card { padding: 18px; }
+  ul { columns: 1; }
+}
+</style>
+</head>
+<body>
+<header class="header">
+  <a href="index.html">← Home</a>
+  <h1>Teaching</h1>
+  <p>Programma del corso di Fisica Matematica 3<br>o Meccanica Analitica e Celeste</p>
+</header>
+
+<nav class="nav">
+  <a href="#course">Course</a>
+  <a href="#programme">Programme</a>
+  <a href="#books">Textbooks</a>
+  <a href="#exam">Exam</a>
+</nav>
+
+<main class="container">
+  <section class="card" id="course">
+    <h2>Docente: Prof. Alessandra Celletti</h2>
+    <p>Il corso verte su un’introduzione alla Meccanica Celeste, cioe’ allo studio del moto di pianeti e satelliti (sia naturali, che artificiali) del sistema solare.</p><p>Si intendono affrontare gli argomenti principali della Meccanica Celeste, quali ad esempio la stabilita’ del sistema solare (che fine faranno la Terra e gli altri pianeti?), il motivo per il quale la Luna rivolge sempre la stessa faccia verso la Terra (e quindi vediamo solo un emisfero della Luna), le collisioni passate e future che caratterizzano il sistema solare (dalla scomparsa dei dinosauri alla previsione di impatti asteroidali).</p>
+  </section>
+
+  <section class="card" id="programme">
+    <h2>Programma analitico del corso</h2>
+    <ul>
+      <li>Richiami di Meccanica Hamiltoniana: trasformazioni canoniche, criteri di canonicità, parentesi di Poisson, integrali primi</li>
+<li>Sistemi integrabili</li>
+<li>Teorema di integrabilità locale</li>
+<li>Teorema di Arnold-Liouville e variabili azione-angolo</li>
+<li>Esempi di sistemi integrabili: oscillatori armonici, moto in un campo centrale, giroscopio pesante</li>
+<li>Moti regolari e caotici</li>
+<li>Sistemi conservativi e dissipativi</li>
+<li>Sistemi continui e discreti, mappe di Poincaré, standard map</li>
+<li>Gli esponenti di Lyapunov</li>
+<li>Il problema dei 2 corpi</li>
+<li>Le leggi di Keplero</li>
+<li>Variabili azione-angolo di Delaunay per il problema dei 3 corpi</li>
+<li>I punti di equilibrio Lagrangiani</li>
+<li>Il problema dei 3 corpi ristretto</li>
+<li>Dinamica rotazionale</li>
+<li>Risonanze spin-orbita: derivazione del modello e costruzione di superfici invarianti</li>
+<li>Teoria perturbativa: teorema di Hamilton-Jacobi, teorema di Birkhoff per gli oscillatori armonici</li>
+<li>Il problema dei 3 corpi ristretto: applicazione della teoria perturbativa per il calcolo della precessione del perielio.</li>
+<li>Teorema KAM: dimostrazione, aritmetica degli intervalli, cenni di teoria dei numeri e frazioni continue.</li>
+<li>Tecniche classiche e superconvergenti</li>
+<li>Cenni sul metodo di Greene</li>
+<li>Teorema di Nekhoroshev</li>
+<li>Collisioni e regolarizzazione</li>
+<li>Trasformazione di Levi-Civita</li>
+    </ul>
+  </section>
+
+  <section class="card highlight" id="books">
+    <h2>Libri di testo consigliati</h2>
+    <p>Dispense fornite dal docente.</p>
+  </section>
+
+  <section class="card" id="exam">
+    <h2>Esame</h2>
+    <p>Il corso si conclude con un esame orale su alcuni degli argomenti trattati nel corso.</p>
+  </section>
+</main>
+
+<footer class="footer">
+  Alessandra Celletti · Department of Mathematics · University of Rome Tor Vergata
+</footer>
+</body>
+</html>
