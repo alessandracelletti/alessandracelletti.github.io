@@ -969,139 +969,71 @@ blockquote,
 }
 
 
-/* =========================================================
-   PATCH RESPONSIVE CONSERVATIVA - 02/07/2026
-   Sostituisce solo il posizionamento a float/margini negativi
-   con una griglia stabile. L'aspetto grafico resta invariato.
-   ========================================================= */
+/* ==========================================================
+   PATCH FINALE ANTI-SOVRAPPOSIZIONE
+   Desktop grande invariato. Quando la finestra non e' abbastanza
+   larga, le colonne passano a una disposizione verticale.
+   Mettere questa sezione ALLA FINE del file stile.css.
+   ========================================================== */
 
-#quadro {
-  display: grid !important;
-  grid-template-columns: minmax(300px, 390px) minmax(360px, 1fr) minmax(320px, 400px) !important;
-  grid-template-areas:
-    "testa testa testa"
-    "sinistra centro destra"
-    "piede piede piede" !important;
-  column-gap: clamp(24px, 3vw, 56px) !important;
-  row-gap: 0 !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  overflow: visible !important;
-  padding: 0 18px !important;
-}
-
-#testa {
-  grid-area: testa !important;
-  margin-left: -18px !important;
-  margin-right: -18px !important;
-  width: auto !important;
-}
-
-#inMezzo {
-  grid-area: centro !important;
-  float: none !important;
-  width: auto !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-#colonnaCn {
-  float: none !important;
-  width: auto !important;
-  min-width: 0 !important;
-  margin: 12px 0 14px 0 !important;
-  padding: 0 !important;
-}
-
-#colonnaSn {
-  grid-area: sinistra !important;
-  float: none !important;
-  width: auto !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 12px 0 12px 0 !important;
-}
-
-#colonnaDx {
-  grid-area: destra !important;
-  float: none !important;
-  width: auto !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  padding: 12px 0 12px 0 !important;
-}
-
-#piede {
-  grid-area: piede !important;
-  clear: none !important;
-}
-
-.MenuSn {
-  width: 100% !important;
-  max-width: 340px !important;
-}
-
-.side-note {
-  width: 100% !important;
-  max-width: 300px !important;
-}
-
-.qlinks.card-box {
-  width: 100% !important;
-  max-width: 400px !important;
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-#colonnaCn .profile-card {
-  width: 100% !important;
-  max-width: 760px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
-
-/* Quando non c'e' spazio reale per tre colonne, i riquadri
-   passano sotto: cosi' non possono mai sovrapporsi. */
-@media (max-width: 1150px) {
+@media (max-width: 1650px) {
   #quadro {
-    grid-template-columns: 1fr !important;
-    grid-template-areas:
-      "testa"
-      "centro"
-      "sinistra"
-      "destra"
-      "piede" !important;
-    padding: 0 16px !important;
+    overflow: visible !important;
   }
 
-  #testa {
-    margin-left: -16px !important;
-    margin-right: -16px !important;
-  }
-
+  #inMezzo,
   #colonnaCn,
   #colonnaSn,
   #colonnaDx {
+    float: none !important;
+    clear: both !important;
     width: auto !important;
     max-width: none !important;
-    margin: 0 !important;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    position: static !important;
   }
 
-  #colonnaCn { padding-top: 14px !important; }
-  #colonnaSn { padding-top: 8px !important; }
-  #colonnaDx { padding-top: 8px !important; padding-bottom: 16px !important; }
+  #colonnaCn {
+    margin-top: 14px !important;
+    margin-bottom: 14px !important;
+  }
+
+  #colonnaSn,
+  #colonnaDx {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
 
   .profile-card,
+  #colonnaCn .profile-card,
   .MenuSn,
   .side-note,
   .qlinks.card-box {
     width: 100% !important;
-    max-width: 620px !important;
+    max-width: 760px !important;
     margin-left: auto !important;
     margin-right: auto !important;
+  }
+
+  .side-note {
+    margin-top: 18px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  #testa {
+    min-height: 190px !important;
+  }
+
+  .profile-card,
+  #colonnaCn .profile-card,
+  .MenuSn,
+  .side-note,
+  .qlinks.card-box {
+    max-width: 620px !important;
   }
 }
