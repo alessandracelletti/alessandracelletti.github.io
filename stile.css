@@ -969,112 +969,102 @@ blockquote,
 }
 
 
-/* ==========================================================
-   PATCH FINALE 2026-07-02: layout responsive senza sovrapposizioni
-   Questa sezione va lasciata ALLA FINE del file stile.css.
-   Mantiene il contenuto e l'aspetto generale, ma sostituisce il
-   vecchio sistema a float/margini negativi con una griglia CSS.
-   ========================================================== */
-
-html,
-body {
-  min-width: 0 !important;
-}
-
-body {
-  overflow-x: auto !important;
-}
+/* =========================================================
+   PATCH RESPONSIVE CONSERVATIVA - 02/07/2026
+   Sostituisce solo il posizionamento a float/margini negativi
+   con una griglia stabile. L'aspetto grafico resta invariato.
+   ========================================================= */
 
 #quadro {
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  overflow: visible !important;
   display: grid !important;
-  grid-template-columns: 320px minmax(360px, 1fr) 340px !important;
+  grid-template-columns: minmax(300px, 390px) minmax(360px, 1fr) minmax(320px, 400px) !important;
   grid-template-areas:
     "testa testa testa"
     "sinistra centro destra"
     "piede piede piede" !important;
-  gap: 18px 22px !important;
-  align-items: start !important;
+  column-gap: clamp(24px, 3vw, 56px) !important;
+  row-gap: 0 !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  overflow: visible !important;
+  padding: 0 18px !important;
 }
 
 #testa {
   grid-area: testa !important;
+  margin-left: -18px !important;
+  margin-right: -18px !important;
+  width: auto !important;
 }
 
 #inMezzo {
   grid-area: centro !important;
+  float: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#colonnaCn {
+  float: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 12px 0 14px 0 !important;
+  padding: 0 !important;
 }
 
 #colonnaSn {
   grid-area: sinistra !important;
+  float: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 12px 0 12px 0 !important;
 }
 
 #colonnaDx {
   grid-area: destra !important;
+  float: none !important;
+  width: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 12px 0 12px 0 !important;
 }
 
 #piede {
   grid-area: piede !important;
-}
-
-/* Annulla il vecchio layout a float/margini negativi solo per i tre riquadri principali. */
-#inMezzo,
-#colonnaCn,
-#colonnaSn,
-#colonnaDx {
-  float: none !important;
   clear: none !important;
-  width: auto !important;
-  max-width: 100% !important;
-  min-width: 0 !important;
-  margin: 0 !important;
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
-  bottom: auto !important;
 }
 
-#colonnaSn {
-  padding: 12px 0 12px 18px !important;
+.MenuSn {
+  width: 100% !important;
+  max-width: 340px !important;
 }
 
-#colonnaDx {
-  padding: 12px 18px 12px 0 !important;
+.side-note {
+  width: 100% !important;
+  max-width: 300px !important;
 }
 
-#colonnaCn {
-  padding: 12px 0 14px 0 !important;
-}
-
-.imbottitura,
-.profile-card,
-.MenuSn,
-.side-note,
-.qlinks,
-.card-box {
-  max-width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-.MenuSn,
-.side-note,
 .qlinks.card-box {
   width: 100% !important;
+  max-width: 400px !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 #colonnaCn .profile-card {
   width: 100% !important;
-  max-width: 680px !important;
+  max-width: 760px !important;
   margin-left: auto !important;
   margin-right: auto !important;
 }
 
-/* Appena lo spazio non basta per tre colonne, i riquadri passano in verticale. */
-@media (max-width: 1120px) {
+/* Quando non c'e' spazio reale per tre colonne, i riquadri
+   passano sotto: cosi' non possono mai sovrapporsi. */
+@media (max-width: 1150px) {
   #quadro {
     grid-template-columns: 1fr !important;
     grid-template-areas:
@@ -1083,19 +1073,27 @@ body {
       "sinistra"
       "destra"
       "piede" !important;
-    gap: 10px !important;
+    padding: 0 16px !important;
   }
 
-  #inMezzo,
+  #testa {
+    margin-left: -16px !important;
+    margin-right: -16px !important;
+  }
+
   #colonnaCn,
   #colonnaSn,
   #colonnaDx {
-    float: none !important;
     width: auto !important;
+    max-width: none !important;
     margin: 0 !important;
-    padding-left: 14px !important;
-    padding-right: 14px !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
+
+  #colonnaCn { padding-top: 14px !important; }
+  #colonnaSn { padding-top: 8px !important; }
+  #colonnaDx { padding-top: 8px !important; padding-bottom: 16px !important; }
 
   .profile-card,
   .MenuSn,
@@ -1105,20 +1103,5 @@ body {
     max-width: 620px !important;
     margin-left: auto !important;
     margin-right: auto !important;
-  }
-}
-
-@media (max-width: 520px) {
-  #inMezzo,
-  #colonnaCn,
-  #colonnaSn,
-  #colonnaDx {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  .profile-card {
-    padding-left: 14px !important;
-    padding-right: 14px !important;
   }
 }
