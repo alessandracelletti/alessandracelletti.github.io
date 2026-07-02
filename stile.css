@@ -1,22 +1,29 @@
-/* stile.css — layout ispirato all'anteprima approvata.
-   Contenuti HTML invariati; cambia solo l'impaginazione grafica. */
+/* stile.css — versione pulita e responsive
+   Layout a tre colonne su schermo grande, a colonna unica su schermo piccolo.
+   Sostituisce completamente il precedente stile.css. */
 
 :root {
   --blue-deep: #024ba9;
   --blue-dark: #003d91;
   --blue-main: #075bb7;
-  --blue-glow: #0b74d1;
-  --line: rgba(255,255,255,.42);
   --text-blue: #003d91;
+  --line: rgba(255,255,255,.42);
 }
 
-html { box-sizing: border-box; }
-*, *::before, *::after { box-sizing: inherit; }
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
 
 body {
   margin: 0;
   padding: 0;
-  font-family: Georgia, serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
   line-height: 1.45;
   color: #fff;
@@ -29,152 +36,239 @@ body a {
 }
 
 #quadro {
-  width: 100% !important;
-  max-width: none !important;
+  width: 100%;
   min-height: 100vh;
-  margin: 0 !important;
+  margin: 0 auto;
   background:
     radial-gradient(circle at 48% 44%, rgba(20,123,215,.22), transparent 34%),
     linear-gradient(180deg, #024ba9 0%, #013f93 100%);
-  overflow: hidden;
+  overflow-x: hidden;
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) minmax(420px, 760px) minmax(300px, 400px);
+  grid-template-areas:
+    "testa testa testa"
+    "sinistra centro destra"
+    "piede piede piede";
+  column-gap: clamp(20px, 3vw, 48px);
+  row-gap: 16px;
+  justify-content: center;
+  align-items: start;
+  padding: 0 clamp(14px, 2vw, 24px) 18px;
 }
 
-/* Banner superiore: immagine approvata come riferimento grafico */
+/* Banner superiore */
 #testa {
+  grid-area: testa;
   position: relative;
-  height: 180px;
-  background: url("banner-v5.png") center top / 100% 100% no-repeat;
+  min-height: 180px;
+  display: grid;
+  grid-template-columns: minmax(280px, 34vw) minmax(420px, 1fr);
+  gap: 28px;
+  align-items: center;
+  padding: 22px 34px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 18% 22%, rgba(255,255,255,0.20) 0 2px, transparent 3px),
+    radial-gradient(circle at 48% 18%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
+    radial-gradient(circle at 72% 75%, rgba(255,255,255,0.16) 0 2px, transparent 3px),
+    linear-gradient(135deg, #023f90 0%, #024ba9 48%, #0367c9 100%);
+  overflow: hidden;
   border-bottom: 1px solid rgba(255,255,255,.85);
 }
 
-/* Correzione formula: copre solo il vecchio "u puntato" nel banner-immagine
-   e riscrive la formula corretta in Georgia. */
-#testa::before {
-  content: "";
-  position: absolute;
-  left: 75.5%;
-  top: 76%;
-  width: 21.5%;
-  height: 18%;
-  background: linear-gradient(90deg, rgba(2,75,169,.70), rgba(2,64,145,.78));
-  border-radius: 18px;
-}
-#testa::after {
-  content: "r = a (1 − e cos u)";
-  position: absolute;
-  left: 76.5%;
-  top: 77.5%;
-  color: #ffffff;
-  font-family: Georgia, serif;
-  font-style: italic;
-  font-size: 27px;
-  line-height: 1;
-  white-space: nowrap;
-  text-shadow: 0 1px 5px rgba(0,0,0,.30);
+#testa h1,
+.header-logo {
+  display: none !important;
 }
 
-/* Il contenuto testuale/formule rimane nell'HTML, ma qui non si duplica
-   perché il banner approvato è usato come immagine di sfondo. */
-.header-logo,
 .header-title,
 .solar-banner {
-  display: none;
+  display: block;
+  position: relative;
+  z-index: 1;
 }
 
-#barra {
-  height: 28px;
-  padding: 2px 30px 0 30px;
+.header-title .eyebrow {
+  margin: 0 0 9px 0;
   color: #ffffff;
-  background: #024ba9;
-  border-bottom: 1px solid rgba(255,255,255,.35);
-  text-align: right;
-  font-size: 16px;
-}
-#clock-placeholder::after {
-  content: "Local time:   12:45:38";
+  font-size: clamp(1.42rem, 2.25vw, 2.18rem);
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-transform: none;
+  text-shadow: 0 3px 12px rgba(0,0,0,0.32);
 }
 
-/* Layout a tre colonne come nell'anteprima */
-#inMezzo {
-  float: left;
+.header-title .university-line {
+  margin-top: 0;
+}
+
+.solar-banner {
+  min-height: 150px;
+  overflow: visible;
+}
+
+.sun {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 58px;
+  height: 58px;
+  margin-top: -29px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff7a8 0%, #ffd35c 42%, #f0a700 72%, rgba(240,167,0,0.10) 73%);
+  box-shadow: 0 0 26px rgba(255,217,92,.88), 0 0 58px rgba(255,202,70,.55);
+}
+
+.orbit {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  border: 1.5px solid rgba(255,255,255,0.62);
+  border-radius: 50%;
+  transform: translateY(-50%) rotate(-13deg);
+}
+
+.orbit span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,255,255,0.45);
+  transform: translate(-50%, -50%);
+}
+
+.orbit-1 { width: 130px; height: 44px; }
+.orbit-1 span { left: 23%; top: 50%; width: 10px; height: 10px; background: #d7e7ff; }
+.orbit-2 { width: 210px; height: 72px; }
+.orbit-2 span { left: 31%; top: 50%; width: 16px; height: 16px; background: #d9a35f; }
+.orbit-3 { width: 300px; height: 104px; }
+.orbit-3 span { left: 36%; top: 50%; width: 21px; height: 21px; background: #7ec7ff; }
+.orbit-4 { width: 410px; height: 144px; }
+.orbit-4 span { left: 40%; top: 50%; width: 29px; height: 29px; background: #d6c196; }
+
+.formula {
+  position: absolute;
+  z-index: 3;
+  color: rgba(255,255,255,0.92);
+  font-style: italic;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.40);
+  white-space: nowrap;
+}
+
+.formula-ham { right: 72px; top: 10px; font-size: clamp(1.02rem, 1.65vw, 1.35rem); transform: rotate(7deg); opacity: .90; }
+.formula-grav { right: 92px; top: 70px; font-size: clamp(1.12rem, 1.9vw, 1.58rem); transform: rotate(-7deg); }
+.formula-kepler { right: 58px; top: 118px; font-size: clamp(0.98rem, 1.45vw, 1.22rem); transform: rotate(-4deg); opacity: .90; }
+
+/* Colonne: niente float e niente margini negativi */
+#colonnaSn {
+  grid-area: sinistra;
   width: 100%;
-  background: transparent;
+  min-width: 0;
+}
+
+#inMezzo {
+  grid-area: centro;
+  width: 100%;
+  min-width: 0;
 }
 
 #colonnaCn {
-  margin: 12px 380px 14px 380px;
-  min-height: 0;
-}
-
-#colonnaSn {
-  float: left;
-  width: 360px;
-  margin-left: -100%;
-  padding: 12px 0 12px 18px;
+  width: 100%;
+  min-width: 0;
 }
 
 #colonnaDx {
-  float: left;
-  width: 360px;
-  margin-left: -380px;
-  padding: 12px 20px 12px 0;
+  grid-area: destra;
+  width: 100%;
+  min-width: 0;
 }
 
-.imbottitura { margin: 0; }
-
-.profile-card {
-  min-height: 0;
-  padding: 8px 28px 16px 28px;
+#piede {
+  grid-area: piede;
+  width: 100%;
+  padding: 6px 24px;
   text-align: center;
-  color: var(--text-blue);
-  background: #ffffff;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.85);
-  box-shadow: 0 8px 22px rgba(0,0,0,.18);
+  color: rgba(255,255,255,.86);
+  background: transparent;
+  font-size: 12px;
 }
 
-.titolo {
-  margin: 0 0 10px 0;
-  color: var(--text-blue);
+#piede p {
+  margin: 0;
+}
+
+.imbottitura {
+  margin: 0;
+}
+
+/* Riquadro centrale */
+.profile-card {
+  width: 100%;
+  max-width: 760px;
+  min-height: 0;
+  margin: 0 auto;
+  padding: 18px 28px 22px;
+  text-align: center;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 50% 42%,
+      rgba(68, 150, 255, 0.34) 0%,
+      rgba(20, 100, 205, 0.28) 38%,
+      rgba(3, 67, 155, 0.72) 100%);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.62);
+  box-shadow: 0 10px 30px rgba(0,0,0,.24);
+}
+
+.profile-card .titolo {
+  margin: 0 0 14px 0;
+  color: #ffffff;
   font-size: 34px;
   line-height: 1.2;
   font-weight: bold;
+  text-shadow: 0 2px 8px rgba(0,0,0,.28);
 }
 
 .profile-photo {
-  width: min(300px, 58%);
+  width: min(260px, 50%);
+  max-height: 340px;
   height: auto;
   display: block;
-  margin: 0 auto 10px auto;
-  border-radius: 5px;
+  margin: 0 auto 10px;
+  border-radius: 6px;
   border: 0;
-  box-shadow: 0 4px 8px rgba(0,0,0,.32);
+  box-shadow: 0 6px 16px rgba(0,0,0,.42);
 }
 
-.blugrass {
-  margin: 10px 0 0 0;
-  color: var(--text-blue);
-  font-size: 13px;
-  line-height: 1.35;
+.profile-card .blugrass {
+  margin: 12px 0 0 0;
+  color: #ffffff;
+  font-size: 14px;
+  line-height: 1.42;
   font-weight: normal;
+  text-shadow: 0 1px 5px rgba(0,0,0,.22);
 }
 
-.email {
-  margin: 10px 0 0 0;
-  color: #e60000;
-  font-size: 13px;
-  line-height: 1.3;
+.profile-card .email {
+  margin: 12px 0 0 0;
+  color: #ffd3d3;
+  font-size: 14px;
+  line-height: 1.35;
+  text-shadow: 0 1px 5px rgba(0,0,0,.22);
 }
 
 /* Menu sinistro */
+.MenuSn,
+.card-box {
+  color: #ffffff;
+  background: linear-gradient(180deg, rgba(7,91,183,.62), rgba(0,61,145,.72));
+  border: 1px solid rgba(255,255,255,.58);
+  border-radius: 14px;
+}
+
 .MenuSn {
-  width: 298px;
+  width: 100%;
   margin: 0;
   padding: 0 18px;
-  color: #ffffff;
-  background: linear-gradient(180deg, rgba(7,91,183,.68), rgba(0,61,145,.78));
-  border: 1px solid rgba(255,255,255,.55);
-  border-radius: 14px;
 }
 
 .MenuSn ul,
@@ -184,7 +278,9 @@ body a {
   list-style-type: none;
 }
 
-.MenuSn li { margin: 0; }
+.MenuSn li {
+  margin: 0;
+}
 
 .MenuSn a:link,
 .MenuSn a:visited,
@@ -194,11 +290,19 @@ body a {
   padding: 8px 8px 8px 42px;
   color: #ffffff;
   border-bottom: 1px solid rgba(255,255,255,.35);
-  font-size: 13px;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
 }
 
-.MenuSn li:last-child a { border-bottom: 0; }
-.MenuSn a:hover { background: rgba(255,255,255,.12); }
+.MenuSn li:last-child a {
+  border-bottom: 0;
+}
+
+.MenuSn a:hover,
+.qlinks a:hover {
+  background: rgba(255,255,255,.12);
+}
 
 .MenuSn a::before {
   position: absolute;
@@ -210,6 +314,7 @@ body a {
   font-size: 18px;
   color: #ffffff;
 }
+
 .MenuSn li:nth-child(1) a::before { content: "👤"; }
 .MenuSn li:nth-child(2) a::before { content: "📚"; }
 .MenuSn li:nth-child(3) a::before { content: "🎓"; }
@@ -221,20 +326,27 @@ body a {
 .MenuSn li:nth-child(9) a::before { content: "🚀"; }
 
 .side-note {
-  width: 220px;
+  width: 90%;
   margin: 28px 0 0 18px;
   padding: 18px 0 0 0;
   border-top: 1px solid rgba(255,255,255,.32);
   color: #ffffff;
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 700;
 }
-.side-note p { margin: 0 0 26px 0; }
+
+.side-note p {
+  margin: 0 0 26px 0;
+}
+
 .side-note a {
   position: relative;
   display: block;
   padding-left: 48px;
   color: #ffffff;
-  font-size: 13px;
 }
+
 .side-note a::before {
   content: "✉";
   position: absolute;
@@ -242,21 +354,20 @@ body a {
   top: -3px;
   font-size: 24px;
 }
+
+.side-note .last-update,
 .last-update {
-  margin-top: 30px !important;
+  margin-top: 30px;
   font-size: 13px;
   font-style: italic;
+  font-weight: 400;
 }
 
-/* Colonna destra: stessi link e testi, stile dell'anteprima */
+/* Colonna destra */
 .card-box {
-  border-radius:14px;
+  width: 100%;
   padding: 12px 16px;
   margin-bottom: 12px;
-  color: #ffffff;
-  background: linear-gradient(180deg, rgba(7,91,183,.66), rgba(0,61,145,.76));
-  border: 1px solid rgba(255,255,255,.55);
-  border-radius: 14px;
 }
 
 .title_sec {
@@ -277,6 +388,10 @@ body a {
   line-height: 1.35;
 }
 
+.qlinks li:last-child a {
+  border-bottom: 0;
+}
+
 .qlinks a::after {
   content: "↗";
   position: absolute;
@@ -285,34 +400,6 @@ body a {
   color: #ffffff;
   font-size: 13px;
 }
-
-.extra-box {
-  margin-top: 12px;
-  text-align: right;
-  font-size: 13px;
-  line-height: 1.35;
-}
-.extra-box p { margin: 0 0 10px 0; }
-.extra-box hr {
-  border: 0;
-  border-top: 1px solid rgba(255,255,255,.32);
-  margin: 7px 0;
-}
-blockquote {
-  margin: 0;
-  font-style: italic;
-}
-blockquote span { display: block; margin-top: 5px; }
-
-#piede {
-  clear: both;
-  padding: 6px 24px;
-  text-align: center;
-  color: rgba(255,255,255,.86);
-  background: transparent;
-  font-size: 12px;
-}
-#piede p { margin: 0; }
 
 /* Classi storiche per eventuali sottopagine */
 .tit-pic,
@@ -330,640 +417,173 @@ blockquote span { display: block; margin-top: 5px; }
   overflow-y: auto;
 }
 
-@media (max-width: 1100px) {
-  #testa { height: 180px; }
-  #colonnaCn,
-  #colonnaSn,
-  #colonnaDx,
-  #inMezzo {
-    float: none;
-    width: auto;
-    margin: 0;
+/* Schermi medi: le colonne restano affiancate finché c'è spazio. */
+@media (max-width: 1250px) and (min-width: 1001px) {
+  #quadro {
+    grid-template-columns: minmax(250px, 300px) minmax(390px, 1fr) minmax(260px, 320px);
+    column-gap: 18px;
   }
-  #colonnaSn,
-  #colonnaDx { padding: 18px; }
-  #colonnaCn { padding: 18px; min-height: 0; }
-  .MenuSn,
-  .side-note { width: auto; }
-  .profile-photo { width: min(398px, 82%); }
-}
 
-
-/* Aggiornamento richiesto: banner e caratteri come nella versione v8,
-   mantenendo l'altezza ridotta del banner e riducendo la foto centrale. */
-body {
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-#testa {
-  position: relative;
-  height: 180px;
-  min-height: 180px;
-  display: grid;
-  grid-template-columns: minmax(330px, 34vw) minmax(520px, 1fr);
-  gap: 28px;
-  align-items: center;
-  padding: 22px 34px;
-  color: #ffffff;
-  background:
-    radial-gradient(circle at 18% 22%, rgba(255,255,255,0.20) 0 2px, transparent 3px),
-    radial-gradient(circle at 48% 18%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
-    radial-gradient(circle at 72% 75%, rgba(255,255,255,0.16) 0 2px, transparent 3px),
-    linear-gradient(135deg, #023f90 0%, #024ba9 48%, #0367c9 100%);
-  overflow: hidden;
-  border-bottom: 1px solid rgba(255,255,255,.85);
-}
-
-#testa::before,
-#testa::after {
-  content: none !important;
-  display: none !important;
-}
-
-.header-logo { display: none !important; }
-.header-title,
-.solar-banner {
-  display: block !important;
-  position: relative;
-  z-index: 1;
-}
-.header-title { align-self: center; }
-.header-title .eyebrow {
-  margin: 0 0 9px 0;
-  color: #ffffff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(1.65rem, 2.7vw, 2.6rem);
-  line-height: 1.15;
-  letter-spacing: 0;
-  text-transform: none;
-  text-shadow: 0 3px 12px rgba(0,0,0,0.32);
-}
-.header-title .university-line { margin-top: 0; }
-#testa h1 { display: none !important; }
-
-.solar-banner {
-  min-height: 150px;
-  overflow: visible;
-}
-.sun {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  width: 58px;
-  height: 58px;
-  margin-top: -29px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff7a8 0%, #ffd35c 42%, #f0a700 72%, rgba(240,167,0,0.10) 73%);
-  box-shadow: 0 0 26px rgba(255,217,92,.88), 0 0 58px rgba(255,202,70,.55);
-}
-.orbit {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  border: 1.5px solid rgba(255,255,255,0.62);
-  border-radius: 50%;
-  transform: translateY(-50%) rotate(-13deg);
-}
-.orbit span {
-  position: absolute;
-  display: block;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(255,255,255,0.45);
-  transform: translate(-50%, -50%);
-}
-.orbit-1 { width: 130px; height: 44px; }
-.orbit-1 span { left: 23%; top: 50%; width: 10px; height: 10px; background: #d7e7ff; }
-.orbit-2 { width: 210px; height: 72px; }
-.orbit-2 span { left: 31%; top: 50%; width: 16px; height: 16px; background: #d9a35f; }
-.orbit-3 { width: 300px; height: 104px; }
-.orbit-3 span { left: 36%; top: 50%; width: 21px; height: 21px; background: #7ec7ff; }
-.orbit-4 { width: 410px; height: 144px; }
-.orbit-4 span { left: 40%; top: 50%; width: 29px; height: 29px; background: #d6c196; }
-
-.formula {
-  position: absolute;
-  z-index: 3;
-  color: rgba(255,255,255,0.92);
-  background: transparent;
-  border: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-style: italic;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.40);
-  white-space: nowrap;
-}
-.formula-ham {
-  right: 72px;
-  top: 10px;
-  font-size: clamp(1.02rem, 1.65vw, 1.35rem);
-  transform: rotate(7deg);
-  opacity: .90;
-}
-.formula-grav {
-  right: 92px;
-  top: 70px;
-  font-size: clamp(1.12rem, 1.9vw, 1.58rem);
-  transform: rotate(-7deg);
-}
-.formula-kepler {
-  right: 58px;
-  top: 118px;
-  font-size: clamp(0.98rem, 1.45vw, 1.22rem);
-  transform: rotate(-4deg);
-  opacity: .90;
-}
-
-.titolo,
-blockquote {
-  font-family: Georgia, "Times New Roman", serif;
-}
-
-.profile-photo {
-  width: min(260px, 50%);
-  max-height: 340px;
-  height: auto;
-}
-
-@media (max-width: 1100px) {
-  #testa {
-    height: auto;
-    min-height: 180px;
-    grid-template-columns: 1fr;
+  .profile-card .titolo {
+    font-size: 30px;
   }
-  .solar-banner { min-height: 135px; }
-}
 
-
-/* Modifiche richieste: nessuna striscia Local time e carattere Georgia ovunque */
-#barra { display: none !important; height: 0 !important; padding: 0 !important; border: 0 !important; }
-body, button, input, select, textarea, .MenuSn a, .qlinks a, .title_sec, .blugrass, .email, .side-note {
-  font-family: Georgia, "Times New Roman", serif !important;
-}
-
-/* Correzione richiesta: Arial/Helvetica ovunque, banner leggermente piu' piccolo,
-   colonna destra un po' piu' staccata dalla zona centrale. */
-body,
-body *,
-.header-title .eyebrow,
-.formula,
-.titolo,
-blockquote,
-.MenuSn a,
-.qlinks a,
-.title_sec,
-.blugrass,
-.email,
-.side-note {
-  font-family: Arial, Helvetica, sans-serif !important;
-}
-
-.header-title .eyebrow {
-  font-size: clamp(1.42rem, 2.25vw, 2.18rem) !important;
-  line-height: 1.12 !important;
-}
-
-#colonnaCn {
-  margin-right: 390px !important;
-}
-
-
-/* Modifiche finali richieste:
-   - eliminato il box inferiore destro dall'HTML;
-   - box sinistro e destro leggermente piu' larghi;
-   - area centrale piu' stretta, con meno bianco intorno al contenuto. */
-#colonnaSn {
-  width: 390px !important;
-  padding-left: 18px !important;
-}
-
-#colonnaDx {
-  width: 400px !important;
-  margin-left: -420px !important;
-  padding-right: 18px !important;
-}
-
-#colonnaCn {
-  margin-left: 410px !important;
-  margin-right: 430px !important;
-}
-
-.MenuSn {
-  width: 340px !important;
-}
-
-.side-note {
-  width: 300px !important;
-}
-
-.qlinks.card-box {
-  width: 100% !important;
-}
-
-@media (max-width: 1100px) {
-  #colonnaCn,
-  #colonnaSn,
-  #colonnaDx {
-    width: auto !important;
-    margin: 0 !important;
-  }
-  .MenuSn,
-  .side-note {
-    width: auto !important;
+  .qlinks a {
+    font-size: 15px;
   }
 }
 
-
-/* --- VERSIONE CENTRO BLU SFUMATO: sostituisce il riquadro bianco centrale --- */
-.profile-card {
-  min-height: 0 !important;
-  padding: 18px 28px 22px 28px !important;
-  text-align: center !important;
-  color: #ffffff !important;
-  background:
-    radial-gradient(circle at 50% 42%,
-      rgba(68, 150, 255, 0.34) 0%,
-      rgba(20, 100, 205, 0.28) 38%,
-      rgba(3, 67, 155, 0.72) 100%) !important;
-  border-radius: 18px !important;
-  border: 1px solid rgba(255,255,255,.62) !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,.24) !important;
-}
-
-.profile-card .titolo,
-.profile-card .blugrass {
-  color: #ffffff !important;
-}
-
-.profile-card .titolo {
-  margin: 0 0 14px 0 !important;
-  font-size: 34px !important;
-  line-height: 1.2 !important;
-  font-weight: bold !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,.28) !important;
-}
-
-.profile-card .blugrass {
-  margin: 12px 0 0 0 !important;
-  font-size: 14px !important;
-  line-height: 1.42 !important;
-  font-weight: normal !important;
-  text-shadow: 0 1px 5px rgba(0,0,0,.22) !important;
-}
-
-.profile-card .email {
-  margin: 12px 0 0 0 !important;
-  color: #ffd3d3 !important;
-  font-size: 14px !important;
-  line-height: 1.35 !important;
-  text-shadow: 0 1px 5px rgba(0,0,0,.22) !important;
-}
-
-.profile-photo {
-  border-radius: 6px !important;
-  box-shadow: 0 6px 16px rgba(0,0,0,.42) !important;
-}
-
-/* Mantengo i box laterali come nella versione approvata, solo lievemente più morbidi. */
-.MenuSn,
-.card-box {
-  background: linear-gradient(180deg, rgba(7,91,183,.62), rgba(0,61,145,.72)) !important;
-  border: 1px solid rgba(255,255,255,.58) !important;
-}
-
-
-/* --- VERSIONE MOBILE FRIENDLY ---
-   Desktop invariato. Sotto 900px il sito diventa a colonna unica:
-   banner, profilo, menu, link utili. */
-@media (max-width: 900px) {
-  html, body {
-    width: 100%;
+/* Sotto 1000px: una colonna sotto l'altra, senza sovrapposizioni. */
+@media (max-width: 1000px) {
+  #quadro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "testa"
+      "centro"
+      "sinistra"
+      "destra"
+      "piede";
+    row-gap: 14px;
+    padding: 0 16px 18px;
     overflow-x: hidden;
   }
 
-  #quadro {
-    width: 100%;
-    min-height: 100vh;
-    overflow: visible !important;
-  }
-
   #testa {
-    height: auto !important;
-    min-height: 210px !important;
-    display: block !important;
-    padding: 18px 18px 22px 18px !important;
-    background:
-      radial-gradient(circle at 18% 22%, rgba(255,255,255,0.20) 0 2px, transparent 3px),
-      radial-gradient(circle at 48% 18%, rgba(255,255,255,0.18) 0 2px, transparent 3px),
-      radial-gradient(circle at 72% 75%, rgba(255,255,255,0.16) 0 2px, transparent 3px),
-      linear-gradient(135deg, #023f90 0%, #024ba9 48%, #0367c9 100%) !important;
-  }
-
-  .header-title,
-  .solar-banner {
-    display: block !important;
+    min-height: 210px;
+    display: block;
+    padding: 18px 18px 22px;
   }
 
   .header-title {
-    width: 100% !important;
-    margin: 0 0 14px 0 !important;
+    width: 100%;
+    margin: 0 0 14px 0;
   }
 
   .header-title .eyebrow {
-    font-size: clamp(1.25rem, 7vw, 1.85rem) !important;
-    line-height: 1.1 !important;
-    margin-bottom: 5px !important;
+    font-size: clamp(1.25rem, 7vw, 1.85rem);
+    line-height: 1.1;
+    margin-bottom: 5px;
   }
 
   .solar-banner {
-    width: 100% !important;
-    min-height: 126px !important;
+    width: 100%;
+    min-height: 126px;
     transform: scale(.86);
     transform-origin: center center;
   }
 
   .sun {
-    right: 8px !important;
-    width: 45px !important;
-    height: 45px !important;
-    margin-top: -22px !important;
+    right: 8px;
+    width: 45px;
+    height: 45px;
+    margin-top: -22px;
   }
 
-  .orbit {
-    right: 8px !important;
-  }
+  .orbit { right: 8px; }
+  .orbit-1 { width: 92px; height: 32px; }
+  .orbit-2 { width: 150px; height: 52px; }
+  .orbit-3 { width: 215px; height: 78px; }
+  .orbit-4 { width: 285px; height: 106px; }
+  .orbit-1 span { width: 8px; height: 8px; }
+  .orbit-2 span { width: 12px; height: 12px; }
+  .orbit-3 span { width: 16px; height: 16px; }
+  .orbit-4 span { width: 22px; height: 22px; }
 
-  .orbit-1 { width: 92px !important; height: 32px !important; }
-  .orbit-2 { width: 150px !important; height: 52px !important; }
-  .orbit-3 { width: 215px !important; height: 78px !important; }
-  .orbit-4 { width: 285px !important; height: 106px !important; }
-
-  .orbit-1 span { width: 8px !important; height: 8px !important; }
-  .orbit-2 span { width: 12px !important; height: 12px !important; }
-  .orbit-3 span { width: 16px !important; height: 16px !important; }
-  .orbit-4 span { width: 22px !important; height: 22px !important; }
-
-  .formula {
-    font-size: 13px !important;
-    max-width: 95vw !important;
-  }
-
-  .formula-ham {
-    right: 18px !important;
-    top: 4px !important;
-  }
-
-  .formula-grav {
-    right: 26px !important;
-    top: 50px !important;
-  }
-
-  .formula-kepler {
-    right: 16px !important;
-    top: 94px !important;
-  }
-
-  #inMezzo,
-  #colonnaCn,
-  #colonnaSn,
-  #colonnaDx {
-    float: none !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #inMezzo {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  #colonnaCn {
-    order: 1 !important;
-    padding: 14px 14px 8px 14px !important;
-  }
-
-  #colonnaSn {
-    order: 2 !important;
-    padding: 8px 14px !important;
-  }
-
-  #colonnaDx {
-    order: 3 !important;
-    padding: 8px 14px 16px 14px !important;
-  }
+  .formula { font-size: 13px; max-width: 95vw; }
+  .formula-ham { right: 18px; top: 4px; }
+  .formula-grav { right: 26px; top: 50px; }
+  .formula-kepler { right: 16px; top: 94px; }
 
   .profile-card,
   .MenuSn,
   .qlinks.card-box,
   .side-note {
-    width: 100% !important;
-    max-width: 560px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    width: 100%;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .profile-card {
-    padding: 16px 18px 18px 18px !important;
+    padding: 16px 18px 18px;
   }
 
   .profile-card .titolo {
-    font-size: 28px !important;
+    font-size: 28px;
   }
 
   .profile-photo {
-    width: min(230px, 72%) !important;
-    max-height: 300px !important;
+    width: min(230px, 72%);
+    max-height: 300px;
   }
 
   .MenuSn {
-    padding: 0 14px !important;
+    padding: 0 14px;
   }
 
   .MenuSn a:link,
   .MenuSn a:visited,
   .MenuSn a:active {
-    padding-top: 9px !important;
-    padding-bottom: 9px !important;
-    font-size: 15px !important;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    font-size: 15px;
   }
 
   .side-note {
-    margin-top: 14px !important;
-    padding-top: 12px !important;
+    margin-top: 14px;
+    padding-top: 12px;
   }
 
   .side-note p {
-    margin-bottom: 10px !important;
+    margin-bottom: 10px;
   }
 
   .qlinks a {
-    font-size: 15px !important;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
+    font-size: 15px;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .title_sec {
-    font-size: 22px !important;
+    font-size: 22px;
   }
 
   #piede {
-    padding: 10px 16px 16px 16px !important;
-    font-size: 11px !important;
+    padding: 10px 16px 16px;
+    font-size: 11px;
   }
 }
 
 /* Telefoni molto stretti */
 @media (max-width: 430px) {
   #testa {
-    min-height: 200px !important;
+    min-height: 200px;
   }
 
   .solar-banner {
     transform: scale(.76);
-    min-height: 112px !important;
+    min-height: 112px;
   }
 
   .header-title .eyebrow {
-    font-size: clamp(1.12rem, 7.5vw, 1.55rem) !important;
+    font-size: clamp(1.12rem, 7.5vw, 1.55rem);
   }
 
   .formula {
-    font-size: 12px !important;
+    font-size: 12px;
   }
 
   .profile-card .titolo {
-    font-size: 25px !important;
+    font-size: 25px;
   }
 
   .profile-card .blugrass,
   .profile-card .email {
-    font-size: 13px !important;
+    font-size: 13px;
   }
 
   .profile-photo {
-    width: min(205px, 76%) !important;
-  }
-}
-
-/* Correzione desktop: restringe davvero il box centrale */
-@media (min-width: 1101px) {
-  #colonnaCn .profile-card {
-    width: 760px !important;
-    max-width: 760px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-/* --- CORREZIONE RESPONSIVE FINALE ---
-   Mantiene le tre colonne su desktop e impedisce sovrapposizioni
-   quando la finestra viene ridotta. */
-
-/* Desktop largo */
-@media (min-width: 1501px) {
-  #colonnaSn {
-    float: left !important;
-    width: 390px !important;
-    margin-left: -100% !important;
-    padding: 12px 0 12px 18px !important;
-  }
-
-  #colonnaDx {
-    float: left !important;
-    width: 400px !important;
-    margin-left: -420px !important;
-    padding: 12px 18px 12px 0 !important;
-  }
-
-  #colonnaCn {
-    margin: 12px 430px 14px 410px !important;
-    padding: 0 !important;
-  }
-
-  #colonnaCn .profile-card {
-    width: 760px !important;
-    max-width: 760px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-/* Desktop medio: ancora tre colonne, ma piu' compatte */
-@media (min-width: 1101px) and (max-width: 1500px) {
-  #inMezzo {
-    float: left !important;
-    width: 100% !important;
-  }
-
-  #colonnaSn {
-    float: left !important;
-    width: 330px !important;
-    margin-left: -100% !important;
-    padding: 12px 0 12px 14px !important;
-  }
-
-  #colonnaDx {
-    float: left !important;
-    width: 330px !important;
-    margin-left: -345px !important;
-    padding: 12px 14px 12px 0 !important;
-  }
-
-  #colonnaCn {
-    margin: 12px 360px 14px 345px !important;
-    padding: 0 !important;
-  }
-
-  .MenuSn {
-    width: 300px !important;
-  }
-
-  .side-note {
-    width: 280px !important;
-  }
-
-  .qlinks.card-box {
-    width: 100% !important;
-  }
-
-  #colonnaCn .profile-card {
-    width: 100% !important;
-    max-width: 700px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-/* Sotto 1100px: layout verticale, senza sovrapposizioni */
-@media (max-width: 1100px) {
-  #inMezzo,
-  #colonnaCn,
-  #colonnaSn,
-  #colonnaDx {
-    float: none !important;
-    width: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  #colonnaCn {
-    padding: 14px 16px 8px 16px !important;
-  }
-
-  #colonnaSn {
-    padding: 8px 16px !important;
-  }
-
-  #colonnaDx {
-    padding: 8px 16px 16px 16px !important;
-  }
-
-  .profile-card,
-  .MenuSn,
-  .side-note,
-  .qlinks.card-box {
-    width: 100% !important;
-    max-width: 620px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    width: min(205px, 76%);
   }
 }
