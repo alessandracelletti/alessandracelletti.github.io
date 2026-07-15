@@ -4,8 +4,73 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SPACEMATH</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+      background: linear-gradient(135deg, #071a33, #163d66);
+      font-family: Arial, Helvetica, sans-serif;
+      color: #16243a;
+    }
+
+    .riquadro {
+      width: min(900px, 100%);
+      padding: 48px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 2px solid #8fc8ff;
+      border-radius: 22px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.28);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      letter-spacing: 0.08em;
+      color: #0b4f8a;
+      text-align: center;
+    }
+
+    p {
+      margin: 0;
+      font-size: clamp(1.25rem, 2.4vw, 1.7rem);
+      line-height: 1.7;
+      text-align: justify;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 18px;
+      }
+
+      .riquadro {
+        padding: 28px 22px;
+      }
+
+      p {
+        text-align: left;
+      }
+    }
+  </style>
 </head>
 <body>
-  <p>SPACEMATH e' un gruppo di lavoro dell'Unione Matematica Italiana (UMI) che si propone come obiettivo di integrare e consolidare le competenze matematiche per la soluzione di problemi rilevanti per le scienze spaziali in senso ampio: dallo studio di corpi naturali del sistema solare alla dinamica dei satelliti artificiali, dai problemi cosmologici alle traiettorie delle sonde interplanetarie.</p>
+  <main class="riquadro">
+    <h1>SPACEMATH</h1>
+    <p>
+      SPACEMATH e' un gruppo di lavoro dell'Unione Matematica Italiana (UMI)
+      che si propone come obiettivo di integrare e consolidare le competenze
+      matematiche per la soluzione di problemi rilevanti per le scienze spaziali
+      in senso ampio: dallo studio di corpi naturali del sistema solare alla
+      dinamica dei satelliti artificiali, dai problemi cosmologici alle
+      traiettorie delle sonde interplanetarie.
+    </p>
+  </main>
 </body>
 </html>
