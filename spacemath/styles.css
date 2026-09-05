@@ -62,7 +62,6 @@ img{max-width:100%;display:block}
     0 4px 12px rgba(0,0,0,.16),
     0 0 0 1px rgba(115,207,255,.08);
 }
-
 .brand-logo{
   width:auto;
   height:98px;
@@ -363,17 +362,10 @@ p{color:var(--muted)}
   .site-header .container{padding-left:0 !important;padding-right:10px !important;}
   .nav-wrap{padding-left:0 !important;}
 }
+
 @media(max-width:980px){
-  .brand{
-    padding:4px 6px;
-    border-radius:12px;
-  }
+  .brand{padding:4px 6px;border-radius:12px;}
 }
-
 @media(max-width:680px){
-  .brand{
-    padding:3px 5px;
-    border-radius:10px;
-  }
+  .brand{padding:3px 5px;border-radius:10px;}
 }
-
